@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+import os
 
 def get_clean_data():
     df = pd.read_csv("data.csv")
@@ -166,8 +167,9 @@ def main():
         initial_sidebar_state="expanded" 
     )
 
-    with open("styles.css") as f:
-        st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+    css_path = os.path.join(os.path.dirname(__file__), "styles.css")
+    with open(css_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     input_data = add_sidebar()
     
