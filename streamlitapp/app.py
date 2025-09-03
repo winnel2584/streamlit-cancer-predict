@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import os
+import sklearn
 
 def get_clean_data():
     csv_path = os.path.join(os.path.dirname(__file__), "data.csv")
