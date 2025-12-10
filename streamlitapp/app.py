@@ -6,18 +6,7 @@ import plotly.graph_objects as go
 import os
 import google.generativeai as genai
 
-# --- DIAGNOSTIC CODE (Delete this later) ---
-import google.generativeai as genai
-st.sidebar.error(f"Google AI Library Version: {genai.__version__}")
 
-try:
-    st.sidebar.write("🔍 AVAILABLE MODELS:")
-    for m in genai.list_models():
-        if 'generateContent' in m.supported_generation_methods:
-            st.sidebar.write(f"- {m.name}")
-except Exception as e:
-    st.sidebar.error(f"Error listing models: {e}")
-# -------------------------------------------
 api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=api_key)
 
@@ -149,7 +138,7 @@ def generate_gemini_report(prediction_label, probability, input_data):
     """
     # DELETED THE "IF" TRAP HERE
     
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.0-flash')
     
     # Construct the prompt
     prompt = f"""
