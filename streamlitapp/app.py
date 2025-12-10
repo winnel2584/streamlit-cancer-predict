@@ -138,7 +138,7 @@ def generate_gemini_report(prediction_label, probability, input_data):
     """
     # DELETED THE "IF" TRAP HERE
     
-    model = genai.GenerativeModel('gemini-2.0-flash-exp')
+    model = genai.GenerativeModel('gemini-flash-latest')
     
     # Construct the prompt
     prompt = f"""
