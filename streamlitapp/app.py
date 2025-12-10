@@ -11,8 +11,7 @@ import google.generativeai as genai
 # If you don't have one yet, leave it blank, and the app will use a fallback rule-based system.
 GOOGLE_API_KEY = "AIzaSyCXWOa6obXni2AAgA7mn_MB0fz3KYuc61Q" 
 
-if GOOGLE_API_KEY != "AIzaSyCXWOa6obXni2AAgA7mn_MB0fz3KYuc61Q":
-    genai.configure(api_key=GOOGLE_API_KEY)
+genai.configure(api_key=GOOGLE_API_KEY)
 
 def get_clean_data():
     # Load data to get statistics (means/max) for the sliders and scaling
