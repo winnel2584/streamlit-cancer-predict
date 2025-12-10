@@ -9,9 +9,9 @@ import google.generativeai as genai
 # --- CONFIGURATION ---
 # ⚠️ REPLACE 'YOUR_API_KEY' WITH YOUR ACTUAL KEY FROM aistudio.google.com
 # If you don't have one yet, leave it blank, and the app will use a fallback rule-based system.
-GOOGLE_API_KEY = "AIzaSyCXWOa6obXni2AAgA7mn_MB0fz3KYuc61Q" 
-
-genai.configure(api_key=GOOGLE_API_KEY)
+# GOOGLE_API_KEY = "AIzaSyCXWOa6obXni2AAgA7mn_MB0fz3KYuc61Q" 
+api_key = st.secrets["GOOGLE_API_KEY"]
+genai.configure(api_key=api_key)
 
 def get_clean_data():
     # Load data to get statistics (means/max) for the sliders and scaling
@@ -139,8 +139,7 @@ def generate_gemini_report(prediction_label, probability, input_data):
     """
     Uses Google Gemini to generate a medical report.
     """
-    if GOOGLE_API_KEY == "AIzaSyCXWOa6obXni2AAgA7mn_MB0fz3KYuc61Q":
-        return "⚠️ Please configure your Google API Key in the code to see the AI Report."
+    # DELETED THE "IF" TRAP HERE
     
     model = genai.GenerativeModel('gemini-pro')
     
