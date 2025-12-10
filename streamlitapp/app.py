@@ -6,10 +6,18 @@ import plotly.graph_objects as go
 import os
 import google.generativeai as genai
 
-# --- CONFIGURATION ---
-# ⚠️ REPLACE 'YOUR_API_KEY' WITH YOUR ACTUAL KEY FROM aistudio.google.com
-# If you don't have one yet, leave it blank, and the app will use a fallback rule-based system.
-# GOOGLE_API_KEY = "AIzaSyCXWOa6obXni2AAgA7mn_MB0fz3KYuc61Q" 
+# --- DIAGNOSTIC CODE (Delete this later) ---
+import google.generativeai as genai
+st.sidebar.error(f"Google AI Library Version: {genai.__version__}")
+
+try:
+    st.sidebar.write("🔍 AVAILABLE MODELS:")
+    for m in genai.list_models():
+        if 'generateContent' in m.supported_generation_methods:
+            st.sidebar.write(f"- {m.name}")
+except Exception as e:
+    st.sidebar.error(f"Error listing models: {e}")
+# -------------------------------------------
 api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=api_key)
 
