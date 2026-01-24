@@ -226,12 +226,15 @@ def add_predictions(input_data):
 
     st.write("---")
     
-    # Gemini Report
+    # --- GEMINI AI SECTION (Updated) ---
     st.subheader("📝 Generative AI Pathology Report")
-    with st.spinner('Consulting AI Doctor...'):
-        report = generate_gemini_report(prediction_label, final_prob, input_data)
-        st.info(report)
-
+    
+    # The 'key' argument ensures the button doesn't confuse Streamlit if you have others
+    if st.button("Generate AI Report", type="primary"):
+        with st.spinner('Consulting AI Doctor...'):
+            report = generate_gemini_report(prediction_label, final_prob, input_data)
+            st.info(report)
+            
 def main():
     # Custom CSS
     st.markdown("""
