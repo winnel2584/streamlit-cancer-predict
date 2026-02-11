@@ -156,20 +156,24 @@ def get_radar_chart(input_data_dict):
 def generate_gemini_report(prediction_label, probability, input_data):
     model = genai.GenerativeModel('gemini-flash-latest')
     
+    # --- UPDATED PROMPT FOR SIMPLE ENGLISH ---
     prompt = f"""
-    Act as a senior oncologist. Analyze this breast mass biopsy result.
+    Act as a caring, empathetic doctor explaining a biopsy result to a patient who has NO medical knowledge.
     
-    **AI Prediction:** {prediction_label}
+    **The Result:** {prediction_label}
     **Confidence:** {probability:.2%}
     
-    **Critical Measurements:**
-    - Area (Worst): {input_data['area_worst']}
-    - Concave Points (Worst): {input_data['concave points_worst']}
-    - Radius (Worst): {input_data['radius_worst']}
-    - Concavity (Mean): {input_data['concavity_mean']}
+    **Key Measurements:**
+    - Area (Size): {input_data['area_worst']}
+    - Texture (Smoothness): {input_data['concave points_worst']}
+    - Radius (Width): {input_data['radius_worst']}
     
-    Write a professional, empathetic 3-sentence medical summary explaining this result. 
-    Focus on what the "Worst" values imply about cell irregularity. Do not explicitly mention the "AI model".
+    Write a 3-sentence explanation using VERY SIMPLE English. 
+    1. First sentence: Clearly state what the result suggests (Benign means safe, Malignant means cancer).
+    2. Second sentence: Explain simply why (e.g., "The cells look larger/rougher than normal" or "The cells look smooth and normal").
+    3. Third sentence: Give a kind recommendation (e.g., "Please see a specialist soon" or "This is good news, just keep monitoring").
+    
+    Do not use complex medical words like "pleomorphism" or "mitosis". Speak like a friend.
     """
     
     try:
