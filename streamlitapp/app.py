@@ -207,29 +207,47 @@ def add_predictions(input_data):
     benign_prob = prob[0][0]
     
     st.subheader("Diagnostic Prediction")
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([1, 2]) # Make the gauge column wider
     
     if prediction[0] == 1:
         prediction_label = "MALIGNANT"
         final_prob = malignant_prob
+        color_hex = "#ff4b4b" # Red
+        
         with col1:
             st.error(f"### {prediction_label}")
-        with col2:
-            st.metric("Confidence", f"{final_prob:.1%}")
+            st.write("The cell characteristics suggest malignancy.")
     else:
         prediction_label = "BENIGN"
         final_prob = benign_prob
+        color_hex = "#2ca02c" # Green
+        
         with col1:
             st.success(f"### {prediction_label}")
-        with col2:
-            st.metric("Confidence", f"{final_prob:.1%}")
+            st.write("The cell characteristics suggest a benign mass.")
+
+    # --- GAUGE CHART ---
+    with col2:
+        fig = go.Figure(go.Indicator(
+            mode = "gauge+number",
+            value = final_prob * 100,
+            title = {'text': f"Confidence ({prediction_label})"},
+            gauge = {
+                'axis': {'range': [0, 100]},
+                'bar': {'color': color_hex},
+                'steps': [
+                    {'range': [0, 100], 'color': "lightgray"},
+                ],
+            }
+        ))
+        fig.update_layout(height=250, margin=dict(l=10, r=10, t=50, b=10))
+        st.plotly_chart(fig, use_container_width=True)
 
     st.write("---")
     
-    # --- GEMINI AI SECTION (Updated) ---
+    # --- GEMINI AI SECTION ---
     st.subheader("📝 Generative AI Pathology Report")
     
-    # The 'key' argument ensures the button doesn't confuse Streamlit if you have others
     if st.button("Generate AI Report", type="primary"):
         with st.spinner('Consulting AI Doctor...'):
             report = generate_gemini_report(prediction_label, final_prob, input_data)
