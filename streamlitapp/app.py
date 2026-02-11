@@ -227,43 +227,22 @@ def add_predictions(input_data):
             st.write("The cell characteristics suggest a benign mass.")
 
     # --- GAUGE CHART ---
-   # --- PRO GAUGE CHART ---
     with col2:
         fig = go.Figure(go.Indicator(
             mode = "gauge+number",
             value = final_prob * 100,
-            title = {'text': f"Confidence ({prediction_label})", 'font': {'size': 20}},
+            title = {'text': f"Confidence ({prediction_label})"},
             gauge = {
-                'axis': {'range': [0, 100], 'tickwidth': 1, 'tickcolor': "black"},
-                'bar': {'color': "black"}, # The needle/bar is black for contrast
-                'bgcolor': "white",
-                'borderwidth': 2,
-                'bordercolor': "gray",
+                'axis': {'range': [0, 100]},
+                'bar': {'color': color_hex},
                 'steps': [
-                    # Green Zone (Low Confidence / Safe-ish)
-                    {'range': [0, 50], 'color': "#D4F1F4"},  
-                    # Yellow Zone (Medium Confidence)
-                    {'range': [50, 75], 'color': "#FEF9D7"}, 
-                    # Red Zone (High Confidence)
-                    {'range': [75, 100], 'color': "#FFD6D6"}  
+                    {'range': [0, 100], 'color': "lightgray"},
                 ],
-                'threshold': {
-                    'line': {'color': "red", 'width': 4},
-                    'thickness': 0.75,
-                    'value': final_prob * 100
-                }
             }
         ))
-        
-        # Make it responsive and clean
-        fig.update_layout(
-            height=250, 
-            margin=dict(l=20, r=20, t=50, b=20),
-            paper_bgcolor="rgba(0,0,0,0)", # Transparent background
-            font={'color': "black", 'family': "Arial"}
-        )
-        
+        fig.update_layout(height=250, margin=dict(l=10, r=10, t=50, b=10))
         st.plotly_chart(fig, use_container_width=True)
+
     st.write("---")
     
     # --- GEMINI AI SECTION ---
