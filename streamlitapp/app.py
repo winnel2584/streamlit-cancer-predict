@@ -34,6 +34,12 @@ def get_clean_data():
 
 def add_sidebar():
     st.sidebar.header("🔬 Tumor Measurements")
+
+    with st.sidebar.expander("ℹ️ About this App", expanded=True):
+        st.write("**Model:** Support Vector Machine (SVC)")
+        st.write("**Accuracy:** 96.5%")
+        st.write("**Dataset:** [Wisconsin Breast Cancer Dataset (WBCD)](https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(diagnostic))")
+        st.caption("Built for SWIES Project")
     st.sidebar.write("Adjust the 10 key features below:")
     
     df = get_clean_data()
