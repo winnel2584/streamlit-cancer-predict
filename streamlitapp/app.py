@@ -268,6 +268,8 @@ def main():
         st.title("🏥 Intelligent Breast Cancer Diagnosis System")
         st.write("Advanced AI diagnostics for SWIES Project. Adjust the biopsy parameters in the sidebar.")
 
+        st.warning("⚠️ DISCLAIMER: This tool is for educational and research purposes only. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider.")
+
     col1, col2 = st.columns([1, 1])
 
     if input_data:
