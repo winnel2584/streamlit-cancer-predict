@@ -33,9 +33,9 @@ def get_clean_data():
         return None
 
 def add_sidebar():
-    st.sidebar.header("🔬 Tumor Measurements")
+    st.sidebar.header("Tumor Measurements")
 
-    with st.sidebar.expander("ℹ️ About this App", expanded=True):
+    with st.sidebar.expander("About this App", expanded=True):
         st.write("**Model:** Support Vector Machine (SVC)")
         st.write("**Accuracy:** 96.5%")
         st.write("**Dataset:** [Wisconsin Breast Cancer Dataset (WBCD)](https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(diagnostic))")
@@ -156,7 +156,6 @@ def get_radar_chart(input_data_dict):
 def generate_gemini_report(prediction_label, probability, input_data):
     model = genai.GenerativeModel('gemini-flash-latest')
     
-    # --- UPDATED PROMPT FOR SIMPLE ENGLISH ---
     prompt = f"""
     Act as a caring, empathetic doctor explaining a biopsy result to a patient who has NO medical knowledge.
     
@@ -256,7 +255,7 @@ def add_predictions(input_data):
     st.write("---")
     
     # --- GEMINI AI SECTION ---
-    st.subheader("📝 Generative AI Pathology Report")
+    st.subheader("Generative AI Pathology Report")
     
     if st.button("Generate AI Report", type="primary"):
         with st.spinner('Consulting AI Doctor...'):
@@ -275,10 +274,10 @@ def main():
     input_data = add_sidebar()
     
     with st.container():
-        st.title("🏥 Intelligent Breast Cancer Diagnosis System")
-        st.write("Advanced AI diagnostics for SWIES Project. Adjust the biopsy parameters in the sidebar.")
+        st.title("Intelligent Breast Cancer Diagnosis System")
+        st.write("Adjust the biopsy parameters in the sidebar.")
 
-        st.warning("⚠️ DISCLAIMER: This tool is for educational and research purposes only. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider.")
+        st.warning("DISCLAIMER: This tool is for educational and research purposes only. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider.")
 
     col1, col2 = st.columns([1, 1])
 
